@@ -115,7 +115,7 @@ export default function RootLayout({
               <FiSearch className="absolute left-3 peer-focus:text-sky-300 text-gray-500 " />
             </div>
             <div className="bg-gray-950 my-4  rounded-xl">
-              <div className="text-bold p-4">What's happening</div>
+              <div className="text-bold p-4">What&apos;s happening</div>
               {array2.map((e, i) => {
                 return <Trending key={i} />;
               })}

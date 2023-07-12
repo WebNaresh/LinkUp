@@ -9,7 +9,10 @@ const Page: NextPage<Props> = ({}) => {
     <div>
       {array.map((e, i) => {
         return (
-          <div className="grid grid-cols-7 font-medium text-xs border-b border-gray-600 py-2">
+          <div
+            key={i}
+            className="grid grid-cols-7 font-medium text-xs border-b border-gray-600 py-2"
+          >
             <div className=" col-span-1">
               <FcLike className="m-auto h-8 w-8" />
             </div>
