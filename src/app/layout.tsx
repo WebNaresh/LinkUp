@@ -4,7 +4,9 @@ import "./globals.css";
 
 import Recommendation from "@/components/Recommendation/Recommendation";
 import Trending from "@/components/Trending/Trending";
+import { ThemeProvider } from "@/context/ThemeContext";
 import { menu } from "@/interface";
+import AuthProvider from "@/utils/AuthProvider/AuthProvider";
 import Image from "next/image";
 import Link from "next/link";
 import { BiHomeCircle, BiSolidHomeCircle, BiSolidSearch } from "react-icons/bi";
@@ -42,100 +44,107 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+      </head>
       <body className={inter.className}>
-        <div
-          className="grid grid-cols-7"
-          style={{
-            height: "100dvh",
-          }}
-        >
-          <section className="col-span-2 hidden md:flex flex-row-reverse ">
-            <div className="flex-col h-full relative px-20">
-              <Link href={"/"} className="flex py-2 px-2  mb-4">
-                <Image
-                  src={"/logo.png"}
-                  height={30}
-                  width={30}
-                  alt="logo"
-                  className="h-fit m-2 "
-                />
-              </Link>
-              {array.map((e, i) => {
-                return (
-                  <Link
-                    key={i}
-                    href={e.link}
-                    className=" flex py-2 px-4 my-2 items-end w-fit font-medium hover:bg-gray-800 rounded-full "
-                  >
-                    {" "}
-                    <div className="text-2xl ">{e.iconOutlined}</div>
-                    <div className=" text-bold flex mx-2 h-full leading-6">
-                      {e.text}
-                    </div>
-                  </Link>
-                );
-              })}
-              <button className="w-11/12 py-3 bg-sky-500 rounded-full">
-                Tweet
-              </button>
-              <div className="grid grid-cols-5 absolute bottom-2 hover:bg-gray-800  p-2 m-2 rounded-full cursor-pointer">
-                <div className="col-span-1 m-auto">
-                  <div className="flex items-center justify-center">
+        <ThemeProvider>
+          <AuthProvider>
+            <div
+              className="grid grid-cols-7"
+              style={{
+                height: "100dvh",
+              }}
+            >
+              <section className="col-span-2 hidden md:flex flex-row-reverse ">
+                <div className="flex-col h-full relative px-20">
+                  <Link href={"/"} className="flex py-2 px-2  mb-4">
                     <Image
-                      src="https://pbs.twimg.com/media/F0r7mEJWYAMTyXV?format=jpg&name=small"
-                      alt="userImage"
-                      className="rounded-full h-8 w-8"
-                      height={40}
-                      width={40}
+                      src={"/logo.png"}
+                      height={30}
+                      width={30}
+                      alt="logo"
+                      className="h-fit m-2 "
                     />
+                  </Link>
+                  {array.map((e, i) => {
+                    return (
+                      <Link
+                        key={i}
+                        href={e.link}
+                        className=" flex py-2 px-4 my-2 items-end w-fit font-medium hover:bg-gray-800 rounded-full "
+                      >
+                        {" "}
+                        <div className="text-2xl ">{e.iconOutlined}</div>
+                        <div className=" text-bold flex mx-2 h-full leading-6">
+                          {e.text}
+                        </div>
+                      </Link>
+                    );
+                  })}
+                  <button className="w-11/12 py-3 bg-sky-500 rounded-full">
+                    Tweet
+                  </button>
+                  <div className="grid grid-cols-5 absolute bottom-2 hover:bg-gray-800  p-2 m-2 rounded-full cursor-pointer">
+                    <div className="col-span-1 m-auto">
+                      <div className="flex items-center justify-center">
+                        <Image
+                          src="https://pbs.twimg.com/media/F0r7mEJWYAMTyXV?format=jpg&name=small"
+                          alt="userImage"
+                          className="rounded-full h-8 w-8"
+                          height={40}
+                          width={40}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid col-span-3  px-3 ">
+                      <div className=" truncate text-sm">naru bhai</div>
+                      <div className=" truncate text-xs text-gray-600">
+                        @nareshInfinite
+                      </div>
+                    </div>
+                    <div className="grid col-span-1 items-center justify-center">
+                      <BsThreeDots className="" />
+                    </div>
                   </div>
                 </div>
-                <div className="grid col-span-3  px-3 ">
-                  <div className=" truncate text-sm">naru bhai</div>
-                  <div className=" truncate text-xs text-gray-600">
-                    @nareshInfinite
+              </section>
+              <section className="col-span-3 border-gray-800 border-x h-screen overflow-y-auto">
+                {children}
+              </section>
+              <section className="col-span-2 p-4">
+                <div className="text-gray-500 relative flex items-center">
+                  <input
+                    type="text"
+                    className="rounded-full pl-10 p-3 peer outline-none bg-gray-950 focus:bg-transparent focus:border-sky-800 border border-transparent focus:ring-0"
+                    placeholder="Search..."
+                  />
+                  <FiSearch className="absolute left-3 peer-focus:text-sky-300 text-gray-500 " />
+                </div>
+                <div className="bg-gray-950 my-4  rounded-xl">
+                  <div className="text-bold p-4">What&apos;s happening</div>
+                  {array2.map((e, i) => {
+                    return <Trending key={i} />;
+                  })}
+
+                  <div className=" hover:bg-gray-900  text-sky-500 text-sm p-4 rounded-b-xl cursor-pointer">
+                    Show more
                   </div>
                 </div>
-                <div className="grid col-span-1 items-center justify-center">
-                  <BsThreeDots className="" />
+                <div className="bg-gray-950 my-4  rounded-xl">
+                  <div className="text-bold p-4">Who to Follow</div>
+                  {array2.map((e, i) => {
+                    return <Recommendation key={i} />;
+                  })}
+
+                  <div className=" hover:bg-gray-900  text-sky-500 text-sm p-4 rounded-b-xl cursor-pointer">
+                    Show more
+                  </div>
                 </div>
-              </div>
+              </section>
             </div>
-          </section>
-          <section className="col-span-3 border-gray-800 border-x h-screen overflow-y-auto">
-            {children}
-          </section>
-          <section className="col-span-2 p-4">
-            <div className="text-gray-500 relative flex items-center">
-              <input
-                type="text"
-                className="rounded-full pl-10 p-3 peer outline-none bg-gray-950 focus:bg-transparent focus:border-sky-800 border border-transparent focus:ring-0"
-                placeholder="Search..."
-              />
-              <FiSearch className="absolute left-3 peer-focus:text-sky-300 text-gray-500 " />
-            </div>
-            <div className="bg-gray-950 my-4  rounded-xl">
-              <div className="text-bold p-4">What&apos;s happening</div>
-              {array2.map((e, i) => {
-                return <Trending key={i} />;
-              })}
-
-              <div className=" hover:bg-gray-900  text-sky-500 text-sm p-4 rounded-b-xl cursor-pointer">
-                Show more
-              </div>
-            </div>
-            <div className="bg-gray-950 my-4  rounded-xl">
-              <div className="text-bold p-4">Who to Follow</div>
-              {array2.map((e, i) => {
-                return <Recommendation key={i} />;
-              })}
-
-              <div className=" hover:bg-gray-900  text-sky-500 text-sm p-4 rounded-b-xl cursor-pointer">
-                Show more
-              </div>
-            </div>
-          </section>
-        </div>
+          </AuthProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
