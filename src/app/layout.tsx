@@ -2,14 +2,20 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 
-import Recommendation from "@/components/Recommendation/Recommendation";
-import Trending from "@/components/Trending/Trending";
-import { ThemeProvider } from "@/context/ThemeContext";
+import GoogleLogin from "@/components/helpers/GoogleLogin/GoogleLogin";
+import Recommendation from "@/components/utils/Recommendation/Recommendation";
+import Trending from "@/components/utils/Trending/Trending";
+import { ThemeProvider } from "@/hooks/ThemeContext";
 import { menu } from "@/interface";
-import AuthProvider from "@/utils/AuthProvider/AuthProvider";
+import AuthProvider from "@/lib/AuthProvider/AuthProvider";
 import Image from "next/image";
 import Link from "next/link";
-import { BiHomeCircle, BiSolidHomeCircle, BiSolidSearch } from "react-icons/bi";
+import {
+  BiBaguette,
+  BiHomeCircle,
+  BiSolidHomeCircle,
+  BiSolidSearch,
+} from "react-icons/bi";
 import {
   BsBookmarkHeart,
   BsBookmarkHeartFill,
@@ -56,9 +62,9 @@ export default function RootLayout({
                 height: "100dvh",
               }}
             >
-              <section className="col-span-2 hidden md:flex flex-row-reverse ">
-                <div className="flex-col h-full relative px-20">
-                  <Link href={"/"} className="flex py-2 px-2  mb-4">
+              <section className="flex relative col-span-1 md:col-span-2 lg:col-span-2 md:flex flex-row-reverse ">
+                <div className="h-full  lg:px-20">
+                  <Link href={"/"} className="flex   mb-4">
                     <Image
                       src={"/logo.png"}
                       height={30}
@@ -72,22 +78,25 @@ export default function RootLayout({
                       <Link
                         key={i}
                         href={e.link}
-                        className=" flex py-2 px-4 my-2 items-end w-fit font-medium hover:bg-gray-800 rounded-full "
+                        className=" flex p-2 my-2 items-end w-fit font-medium hover:bg-gray-800 rounded-full "
                       >
                         {" "}
                         <div className="text-2xl ">{e.iconOutlined}</div>
-                        <div className=" text-bold flex mx-2 h-full leading-6">
+                        <div className=" hidden lg:inline-block md:inline-block text-bold mx-2 h-full leading-6">
                           {e.text}
                         </div>
                       </Link>
                     );
                   })}
-                  <button className="w-11/12 py-3 bg-sky-500 rounded-full">
+                  <button className=" hidden w-11/12 py-3 bg-sky-500 rounded-full">
                     Tweet
                   </button>
-                  <div className="grid grid-cols-5 absolute bottom-2 hover:bg-gray-800  p-2 m-2 rounded-full cursor-pointer">
-                    <div className="col-span-1 m-auto">
-                      <div className="flex items-center justify-center">
+                  <button className=" lg:hidden  bg-sky-500 rounded-full p-2">
+                    <BiBaguette className="text-2xl" />
+                  </button>
+                  <div className="grid grid-cols-5 absolute bottom-2 hover:bg-gray-800  p-2  rounded-full cursor-pointer">
+                    <div className="lg:col-span-1 md:col-span-5 col-span-5 m-auto">
+                      <div className="flex items-center col-span-5 justify-center">
                         <Image
                           src="https://pbs.twimg.com/media/F0r7mEJWYAMTyXV?format=jpg&name=small"
                           alt="userImage"
@@ -97,22 +106,23 @@ export default function RootLayout({
                         />
                       </div>
                     </div>
-                    <div className="grid col-span-3  px-3 ">
+                    <div className="hidden  lg:grid col-span-3  px-3 ">
                       <div className=" truncate text-sm">naru bhai</div>
                       <div className=" truncate text-xs text-gray-600">
                         @nareshInfinite
                       </div>
                     </div>
-                    <div className="grid col-span-1 items-center justify-center">
+                    <div className="hidden  lg:grid col-span-1 items-center justify-center">
                       <BsThreeDots className="" />
                     </div>
                   </div>
                 </div>
               </section>
-              <section className="col-span-3 border-gray-800 border-x h-screen overflow-y-auto">
+              <section className="col-span-6 md:col-span-5  lg:col-span-3 border-gray-800 border-x h-screen overflow-y-auto">
                 {children}
               </section>
-              <section className="col-span-2 p-4">
+              <section className="hidden lg:inline-block col-span-2 p-4">
+                <GoogleLogin />
                 <div className="text-gray-500 relative flex items-center">
                   <input
                     type="text"

@@ -9,7 +9,7 @@ interface Props {
 const Layout: NextPage<Props> = ({ children }) => {
   return (
     <div>
-      <div className="text-gray-500 relative flex items-center">
+      <div className="text-gray-500 flex items-center z-50 sticky bg-black top-0 ">
         <input
           type="text"
           className="rounded-full pl-10 p-3 peer outline-none w-full m-2 bg-gray-900 focus:bg-transparent focus:border-sky-800 border border-transparent focus:ring-0"

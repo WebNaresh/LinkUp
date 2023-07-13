@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, ReactNode, useState } from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 type Theme = "light" | "dark";
 interface ThemContextProps {
   theme: Theme;
@@ -28,4 +28,8 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
+};
+
+export const useThemeContext = () => {
+  return useContext(ThemeContext);
 };

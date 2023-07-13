@@ -38,4 +38,4 @@ const Page: NextPage<Props> = ({}) => {
 };
 
 export default Page;
-let array: number[] = [1, 2, 3, 4];
+let array: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];

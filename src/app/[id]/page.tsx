@@ -1,4 +1,4 @@
-import FeedCard from "@/components/FeedCard/FeedCard";
+import FeedCard from "@/components/utils/FeedCard/FeedCard";
 import { NextPage } from "next";
 import Image from "next/image";
 import { SlCalender } from "react-icons/sl";

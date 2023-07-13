@@ -1,5 +1,5 @@
-import FeedCard from "@/components/FeedCard/FeedCard";
-import CreateTweet from "@/components/createTweet/createTweet";
+import FeedCard from "@/components/utils/FeedCard/FeedCard";
+import CreateTweet from "@/components/utils/createTweet/createTweet";
 import { NextPage } from "next";
 
 interface Props {}
