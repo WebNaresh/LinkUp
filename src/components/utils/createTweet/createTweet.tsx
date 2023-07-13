@@ -24,10 +24,10 @@ const CreateTweet: NextPage<Props> = ({}) => {
           <textarea
             placeholder="What Is Happening?!"
             style={{}}
-            className="resize-none h-auto overflow-hidden bg-transparent outline-none border-slate-900 border-b rounded-xl text-xs p-2 text-gray-300"
+            className="resize-none h-auto w-fit overflow-hidden bg-transparent outline-none border-slate-900 border-b rounded-xl text-xs p-2 text-gray-300"
             name=""
             id=""
-            cols={40}
+            cols={30}
             rows={3}
           ></textarea>
         </div>
